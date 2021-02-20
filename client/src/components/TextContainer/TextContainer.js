@@ -20,7 +20,9 @@ const TextContainer = ({ users }) => (
         </span>
       </h2>
       <h2>
-        Github Repo
+        <a className="github" href="https://github.com/shivamkakkar4/chat-app" target="_blank">
+          Github Repo
+        </a>
         <span role="img" aria-label="emoji">
           ⬅️
         </span>

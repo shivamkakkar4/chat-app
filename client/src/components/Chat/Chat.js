@@ -3,6 +3,7 @@ import queryString from "query-string";
 import io from "socket.io-client";
 import "./Chat.css";
 import InfoBar from "../InfoBar/InfoBar";
+import { useHistory } from "react-router-dom";
 import Messages from "../Messages/Messages";
 import Input from "../Input/Input";
 import TextContainer from "../TextContainer/TextContainer";
@@ -22,6 +23,7 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const ENDPOINT = "http://localhost:5000";
+  const history = useHistory();
 
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
@@ -32,7 +34,10 @@ const Chat = ({ location }) => {
     setRoom(room);
 
     socket.emit("join", { name, room }, error => {
-      if (error) alert(error);
+      if (error) {
+        alert(error);
+        history.push("/");
+      }
     });
 
     return () => {
